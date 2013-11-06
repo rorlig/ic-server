@@ -21,11 +21,11 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query('SELECT * FROM user', function(err, rows, fields) {
-	if (err) throw err;
+// connection.query('SELECT * FROM phones', function(err, rows, fields) {
+// 	if (err) throw err;
 
-	console.log('The row length is: ', rows.length);
-});
+// 	console.log('The row length is: ', rows.length);
+// });
 
 
 
@@ -59,7 +59,7 @@ app.post('/', function (req, res){
 	//todo validate parameters of the request...
 
 	console.log('post request to add user');
-	connection.query('INSERT INTO user SET ?', req.body, function(err, result) {
+	connection.query('INSERT INTO phones SET ?', req.body, function(err, result) {
 		//todo do the error checking..
 //		console.log('insert id: ' + result.insertId );
 		res.send("ok");
@@ -76,12 +76,16 @@ app.get('/', function (req, res) {
 
 	//todo authenticate the request...
 	//todo validate parameters of the request...
-	connection.query('SELECT * FROM user WHERE phoneNumber = \'' +  req.query.phoneNumber + '\'', function(err, result) {
+	connection.query('SELECT * FROM phones WHERE phoneNumber = \'' +  req.query.phoneNumber + '\'', function(err, result) {
 		//todo do the error checking..
 		//response
 
-		console.log('result is  ' + JSON.stringify(result) );
-		res.send(JSON.stringify(result));
+		console.log('result is  ' + JSON.stringify(result[0]) );
+		if (result[0]!=undefined) {
+			res.send(JSON.stringify(result[0]));
+		} else {
+			res.send("[]");
+		}
 
 	});
 
