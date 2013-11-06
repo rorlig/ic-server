@@ -39,8 +39,8 @@ var wirelessNumber2 = {
 
 var landlineNumber = {
 	phoneNumber: "7814662986",
-	carrierName: "Verizon",
-	carrierType: "Wireless"
+	carrierName: "Unknown",
+	carrierType: "LandLine"
 
 }
 //todo some tests are failing ?
